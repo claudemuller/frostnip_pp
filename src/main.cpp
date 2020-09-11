@@ -1,7 +1,18 @@
 #include <iostream>
+#include "Constants.h"
+#include "Game.h"
 
 int main() {
-	std::cout << "test" << std::endl;
+	Game *game = new Game();
+	game->init(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	while (game->isRunning()) {
+		game->processInput();
+		game->update();
+		game->render();
+	}
+
+	game->destroy();
 
 	return 0;
 }
