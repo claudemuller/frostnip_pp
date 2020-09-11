@@ -4,10 +4,10 @@ project(frostnip_pp)
 set(CMAKE_CXX_STANDARD 14)
 
 # Adds the files that are part of the project
-add_executable(frostnip_pp
-        src/main.cpp
-        src/Game.cpp
-        src/Game.h
+add_executable(frostnip_pp src/main.cpp
+        src/Game.cpp src/Game.h
+        src/Utils.cpp src/Utils.h
+        src/Vec2.cpp src/Vec2.h
         src/Constants.h)
 
 # Tells CMake that the find scripts are inside inside subfolder /cmake

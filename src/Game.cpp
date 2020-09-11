@@ -1,10 +1,9 @@
 #include <iostream>
 #include "Game.h"
+#include "Vec2.h"
 
-float projPosX = 0.0f;
-float projPosY = 0.0f;
-float projVelX = 0.5f;
-float projVelY = 0.5f;
+Vec2 projectilePos = Vec2(0.0f, 0.0f);
+Vec2 projectileVel = Vec2(20.0f, 20.0f);
 
 Game::Game() {
 	running = false;
@@ -61,20 +60,19 @@ void Game::processInput() {
 void Game::update() {
 	int waited_for = SDL_GetTicks();
 	// Sleep the execution until the target time in milliseconds is reached.
-	int time_to_wait = FRAME_TARGET_TIME - (SDL_GetTicks() - lastFrameTime);
+	int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - lastFrameTime);
 	// Only call delay if processing is too fast in the current frame.
-	if (time_to_wait > 0 && time_to_wait <= FRAME_TARGET_TIME) {
-		SDL_Delay(time_to_wait);
+	if (timeToWait > 0 && timeToWait <= FRAME_TARGET_TIME) {
+		SDL_Delay(timeToWait);
 	}
 //	printf("FPS: %d\n", lastFrameTime - waited_for);
-	float delta_time = (float)(SDL_GetTicks() - lastFrameTime) / 1000.0f;
+	float deltaTime = (float)(SDL_GetTicks() - lastFrameTime) / 1000.0f;
 	// Clamp deltaTime to a maximum value
-//	delta_time = delta_time > 0.05f ? 0.05f : delta_time;
+	deltaTime = deltaTime > 0.05f ? 0.05f : deltaTime;
 	// Sets the new ticks fo the current frame to be used in the next pass
 	lastFrameTime = SDL_GetTicks();
 
-	projPosX += projVelX;
-	projPosY += projVelY;
+	projectilePos += projectileVel * deltaTime;
 }
 
 void Game::render() {
@@ -82,8 +80,8 @@ void Game::render() {
 	SDL_RenderClear(renderer);
 
 	SDL_Rect projectile = {
-			(int)projPosX,
-			(int)projPosY,
+			(int)projectilePos.getX(),
+			(int)projectilePos.getY(),
 			10,
 			10
 	};
