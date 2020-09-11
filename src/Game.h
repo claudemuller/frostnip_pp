@@ -12,7 +12,7 @@ public:
 
 	Game();
 
-	bool isRunning() { return running; };
+	bool isRunning() const { return running; };
 	void init(int width, int height);
 	void processInput();
 	void update();
