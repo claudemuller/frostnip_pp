@@ -10,6 +10,8 @@ add_executable(frostnip_pp src/main.cpp
         src/Vec2.cpp src/Vec2.h
         src/Entity.cpp src/Entity.h
         src/EntityManager.cpp src/EntityManager.h
+        src/TextureManager.cpp src/TextureManager.h
+        src/AssetManager.cpp src/AssetManager.h
         src/Component.h
         src/Components/TransformComponent.cpp src/Components/TransformComponent.h
         src/Constants.h)

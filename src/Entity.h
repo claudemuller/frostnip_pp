@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <map>
 #include "Component.h"
 
 class EntityManager;
@@ -25,14 +26,21 @@ public:
 		T* newComponent(new T(std::forward<TArgs>(args)...));
 		newComponent->owner = this;
 		components.emplace_back(newComponent);
+		componentTypeMap[&typeid(*newComponent)] = newComponent;
 		newComponent->init();
 		return *newComponent;
+	}
+
+	template <typename T>
+	T* getComponent() {
+		return static_case<T*>(componentTypeMap[&typeid(T)]);
 	}
 
 private:
 	EntityManager& manager;
 	bool active;
 	std::vector<Component*> components;
+	std::map<const std::type_info*, Component*> componentTypeMap;
 };
 
 #endif //FROSTNIP_PP_ENTITY_H
