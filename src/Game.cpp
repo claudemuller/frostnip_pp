@@ -59,6 +59,20 @@ void Game::processInput() {
 }
 
 void Game::update() {
+	int waited_for = SDL_GetTicks();
+	// Sleep the execution until the target time in milliseconds is reached.
+	int time_to_wait = FRAME_TARGET_TIME - (SDL_GetTicks() - lastFrameTime);
+	// Only call delay if processing is too fast in the current frame.
+	if (time_to_wait > 0 && time_to_wait <= FRAME_TARGET_TIME) {
+		SDL_Delay(time_to_wait);
+	}
+//	printf("FPS: %d\n", lastFrameTime - waited_for);
+	float delta_time = (float)(SDL_GetTicks() - lastFrameTime) / 1000.0f;
+	// Clamp deltaTime to a maximum value
+//	delta_time = delta_time > 0.05f ? 0.05f : delta_time;
+	// Sets the new ticks fo the current frame to be used in the next pass
+	lastFrameTime = SDL_GetTicks();
+
 	projPosX += projVelX;
 	projPosY += projVelY;
 }

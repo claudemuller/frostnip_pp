@@ -4,6 +4,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
+#include "Constants.h"
 
 class Game {
 public:
@@ -21,6 +22,7 @@ public:
 
 private:
 	bool running;
+	int lastFrameTime = 0;
 };
 
 #endif //FROSTNIP_PP_GAME_H
