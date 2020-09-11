@@ -1,6 +1,5 @@
 #include "SDL.h"
 #include "TransformComponent.h"
-//#include "../EntityManager.h"
 #include "../Game.h"
 
 TransformComponent::TransformComponent(int x, int y, int velX, int velY, int w, int h, int s) {

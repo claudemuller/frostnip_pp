@@ -10,8 +10,6 @@ public:
 	virtual void init() {};
 	virtual void update(float deltaTime) {};
 	virtual void render() {};
-
-private:
 };
 
 #endif //FROSTNIP_PP_COMPONENT_H

@@ -3,8 +3,9 @@
 
 #include "../EntityManager.h"
 #include "../Vec2.h"
+#include "../Game.h"
 
-class TransformComponent : Component {
+class TransformComponent : public Component {
 public:
 	Vec2 position;
 	Vec2 velocity;
@@ -17,8 +18,6 @@ public:
 	void init() override;
 	void update(float deltaTime) override;
 	void render() override;
-
-private:
 };
 
 #endif //FROSTNIP_PP_TRANSFORMCOMPONENT_H

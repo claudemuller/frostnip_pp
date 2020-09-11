@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <string>
-#include "EntityManager.h"
 #include "Component.h"
 
 class EntityManager;
@@ -20,6 +19,15 @@ public:
 	void render();
 	void destroy();
 	bool isActive() const { return active; };
+
+	template <typename T, typename... TArgs>
+	T& addComponent(TArgs&&... args) {
+		T* newComponent(new T(std::forward<TArgs>(args)...));
+		newComponent->owner = this;
+		components.emplace_back(newComponent);
+		newComponent->init();
+		return *newComponent;
+	}
 
 private:
 	EntityManager& manager;

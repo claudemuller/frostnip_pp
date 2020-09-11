@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Vec2.h"
 #include "EntityManager.h"
+#include "Components/TransformComponent.h"
 
 EntityManager entityManager;
 SDL_Renderer* Game::renderer;
@@ -35,6 +36,8 @@ void Game::init(int width, int height) {
 		return;
 	}
 
+	loadLevel(0);
+
 	running = true;
 }
 
@@ -58,9 +61,9 @@ void Game::processInput() {
 	}
 }
 
-void loadLevel(int levelNumber) {
-	Entity block = entityManager.addEntity("test");
-//	block.addComponent<TransformComponent>();
+void Game::loadLevel(int levelNumber) {
+	Entity& newEntity(entityManager.addEntity("test"));
+	newEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 }
 
 void Game::update() {
@@ -77,11 +80,18 @@ void Game::update() {
 	deltaTime = deltaTime > 0.05f ? 0.05f : deltaTime;
 	// Sets the new ticks fo the current frame to be used in the next pass
 	lastFrameTime = SDL_GetTicks();
+
+	entityManager.update(deltaTime);
 }
 
 void Game::render() {
 	SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
 	SDL_RenderClear(renderer);
+
+	if (!entityManager.hasEntities()) {
+		return;
+	}
+	entityManager.render();
 
 	SDL_RenderPresent(renderer);
 }
