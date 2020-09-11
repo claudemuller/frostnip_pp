@@ -8,6 +8,10 @@ add_executable(frostnip_pp src/main.cpp
         src/Game.cpp src/Game.h
         src/Utils.cpp src/Utils.h
         src/Vec2.cpp src/Vec2.h
+        src/Entity.cpp src/Entity.h
+        src/EntityManager.cpp src/EntityManager.h
+        src/Component.h
+        src/Components/TransformComponent.cpp src/Components/TransformComponent.h
         src/Constants.h)
 
 # Tells CMake that the find scripts are inside inside subfolder /cmake

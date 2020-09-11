@@ -1,9 +1,10 @@
 #include <iostream>
 #include "Game.h"
 #include "Vec2.h"
+#include "EntityManager.h"
 
-Vec2 projectilePos = Vec2(0.0f, 0.0f);
-Vec2 projectileVel = Vec2(20.0f, 20.0f);
+EntityManager entityManager;
+SDL_Renderer* Game::renderer;
 
 Game::Game() {
 	running = false;
@@ -57,6 +58,11 @@ void Game::processInput() {
 	}
 }
 
+void loadLevel(int levelNumber) {
+	Entity block = entityManager.addEntity("test");
+//	block.addComponent<TransformComponent>();
+}
+
 void Game::update() {
 	int waited_for = SDL_GetTicks();
 	// Sleep the execution until the target time in milliseconds is reached.
@@ -71,22 +77,11 @@ void Game::update() {
 	deltaTime = deltaTime > 0.05f ? 0.05f : deltaTime;
 	// Sets the new ticks fo the current frame to be used in the next pass
 	lastFrameTime = SDL_GetTicks();
-
-	projectilePos += projectileVel * deltaTime;
 }
 
 void Game::render() {
 	SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
 	SDL_RenderClear(renderer);
-
-	SDL_Rect projectile = {
-			(int)projectilePos.getX(),
-			(int)projectilePos.getY(),
-			10,
-			10
-	};
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-	SDL_RenderFillRect(renderer, &projectile);
 
 	SDL_RenderPresent(renderer);
 }
