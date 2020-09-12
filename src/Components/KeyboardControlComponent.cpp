@@ -19,24 +19,22 @@ void KeyboardControlComponent::update(float deltaTime) {
 	if (Game::event.type == SDL_KEYDOWN) {
 		std::string keyCode = std::to_string(Game::event.key.keysym.sym);
 
+		// TODO: fix this speed issue.
+		int speed = transform->speed * 20;
 		if (keyCode == upKey) {
-			transform->velocity.setY(-10);
-			transform->velocity.setX(0);
+			transform->velocity.setY(-speed);
 			sprite->play("UpAnimation");
 		}
 		if (keyCode == rightKey) {
-			transform->velocity.setY(0);
-			transform->velocity.setX(10);
+			transform->velocity.setX(speed);
 			sprite->play("RightAnimation");
 		}
 		if (keyCode == downKey) {
-			transform->velocity.setY(10);
-			transform->velocity.setX(0);
+			transform->velocity.setY(speed);
 			sprite->play("DownAnimation");
 		}
 		if (keyCode == leftKey) {
-			transform->velocity.setY(0);
-			transform->velocity.setX(-10);
+			transform->velocity.setX(-speed);
 			sprite->play("LeftAnimation");
 		}
 		if (keyCode == shootKey) {

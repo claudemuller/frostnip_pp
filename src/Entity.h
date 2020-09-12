@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include "Constants.h"
 #include "Component.h"
 
 class EntityManager;
@@ -13,9 +14,10 @@ class Component;
 class Entity {
 public:
 	std::string name;
+	LayerType layer;
 
 	Entity(EntityManager& manager);
-	Entity(EntityManager& manager, std::string name);
+	Entity(EntityManager& manager, std::string name, LayerType layer);
 
 	void update(float deltaTime);
 	void render();
@@ -40,6 +42,7 @@ public:
 
 private:
 	EntityManager& manager;
+	int speed;
 	bool active;
 	std::vector<Component*> components;
 	std::map<const std::type_info*, Component*> componentTypeMap;

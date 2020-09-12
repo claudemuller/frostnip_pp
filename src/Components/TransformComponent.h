@@ -12,8 +12,9 @@ public:
 	int width;
 	int height;
 	int scale;
+	int speed;
 
-	TransformComponent(int x, int y, int velX, int velY, int w, int h, int s);
+	TransformComponent(int x, int y, int velX, int velY, int w, int h, int s, int sp = 0);
 
 	void init() override;
 	void update(float deltaTime) override;

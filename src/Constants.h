@@ -9,4 +9,15 @@
 
 #define DEBUG false
 
+enum LayerType {
+	TILEMAP_LAYER = 0,
+	VEGETATION_LAYER,
+	ENEMY_LAYER,
+	PLAYER_LAYER,
+	PROJECTILE_LAYER,
+	UI_LAYER
+};
+
+const unsigned int NUM_LAYERS = 6;
+
 #endif //FROSTNIP_PP_CONSTANTS_H
