@@ -16,6 +16,7 @@ public:
 	static AssetManager* assetManager;
 	static SDL_Event event;
 	static SDL_Rect camera;
+	static bool debug;
 
 	Game();
 

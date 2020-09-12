@@ -53,7 +53,7 @@ unsigned int EntityManager::getEntityCount() {
 }
 
 void EntityManager::listEntities() const {
-	if (DEBUG) {
+	if (Game::debug) {
 		unsigned int i = 0;
 		for (auto& entity : entities) {
 			std::cout << "Entity[" << i << "]: " << entity->name << std::endl;

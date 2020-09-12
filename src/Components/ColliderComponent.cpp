@@ -22,7 +22,7 @@ void ColliderComponent::update(float deltaTime) {
 }
 
 void ColliderComponent::render() {
-	if (DEBUG) {
+	if (Game::debug) {
 		SDL_SetRenderDrawColor(Game::renderer, 255, 0, 0, 255);
 		SDL_RenderDrawRect(Game::renderer, &dstRect);
 	}

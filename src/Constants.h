@@ -7,8 +7,6 @@
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 
-#define DEBUG false
-
 enum LayerType {
 	TILEMAP_LAYER = 0,
 	VEGETATION_LAYER,

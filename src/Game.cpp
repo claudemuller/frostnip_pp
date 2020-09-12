@@ -14,6 +14,7 @@ SDL_Renderer* Game::renderer;
 SDL_Event Game::event;
 SDL_Rect Game::camera = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 Map* map;
+bool Game::debug = false;
 
 Game::Game() {
 	running = false;
@@ -51,15 +52,27 @@ void Game::init(int width, int height) {
 
 void Game::processInput() {
 	SDL_PollEvent(&event);
+	bool keyDown;
 	switch (event.key.type) {
 		case SDL_QUIT: {
 			running = false;
 			break;
 		}
 		case SDL_KEYDOWN: {
+			if (keyDown) {
+				break;
+			}
+			keyDown = true;
 			if (event.key.keysym.sym == SDLK_ESCAPE) {
 				running = false;
 			}
+			if (event.key.keysym.sym == SDLK_F1) {
+				debug = !debug;
+			}
+			break;
+		}
+		case SDL_KEYUP: {
+			keyDown = false;
 			break;
 		}
 		default: {
@@ -81,7 +94,7 @@ void Game::loadLevel(int levelNumber) {
 
 	// Add components to entities and entities to entity manager.
 	Entity& tankEntity(entityManager.addEntity("tank", ENEMY_LAYER));
-	tankEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+	tankEntity.addComponent<TransformComponent>(106, 495, 20, 0, 32, 32, 1);
 	tankEntity.addComponent<SpriteComponent>("tank-image");
 	TransformComponent* tankTransform = tankEntity.getComponent<TransformComponent>();
 	tankEntity.addComponent<ColliderComponent>(
