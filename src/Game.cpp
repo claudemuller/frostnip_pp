@@ -65,13 +65,17 @@ void Game::processInput() {
 
 void Game::loadLevel(int levelNumber) {
 	// Add assets to asset manager.
-	std::string textureFilePath = "./assets/images/tank-big-right.png";
-	assetManager->addTexture("tank-image", textureFilePath.c_str());
+	assetManager->addTexture("tank-image", std::string("./assets/images/tank-big-right.png").c_str());
+	assetManager->addTexture("chopper-image", std::string("./assets/images/chopper-spritesheet.png").c_str());
 
 	// Add components to entities and entities to entity manager.
-	Entity& tank(entityManager.addEntity("tank"));
-	tank.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
-	tank.addComponent<SpriteComponent>("tank-image");
+	Entity& tankEntity(entityManager.addEntity("tank"));
+	tankEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+	tankEntity.addComponent<SpriteComponent>("tank-image");
+
+	Entity& chopperEntity(entityManager.addEntity("chopper"));
+	chopperEntity.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
+	chopperEntity.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
 
 	entityManager.listEntities();
 }
