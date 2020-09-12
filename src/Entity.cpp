@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Entity.h"
 
 Entity::Entity(EntityManager& manager) : manager(manager) {
@@ -24,3 +25,14 @@ void Entity::destroy() {
 	active = false;
 }
 
+void Entity::listComponents() {
+	unsigned int i = 0;
+	for (auto& componentType : componentTypeMap) {
+		std::cout << "\t|_Component<" << componentType.first->name() << ">" << std::endl;
+		i++;
+	}
+}
+
+//std::map<const std::type_info*, Component*> Entity::getComponentTypes() {
+//	return componentTypeMap;
+//}

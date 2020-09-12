@@ -20,6 +20,7 @@ public:
 	void render();
 	void destroy();
 	bool isActive() const { return active; };
+	void listComponents();
 
 	template <typename T, typename... TArgs>
 	T& addComponent(TArgs&&... args) {

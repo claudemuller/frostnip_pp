@@ -72,6 +72,8 @@ void Game::loadLevel(int levelNumber) {
 	Entity& tank(entityManager.addEntity("tank"));
 	tank.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 	tank.addComponent<SpriteComponent>("tank-image");
+
+	entityManager.listEntities();
 }
 
 void Game::update() {
