@@ -5,10 +5,15 @@
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "Constants.h"
+#include "EntityManager.h"
+#include "Entity.h"
+
+class AssetManager;
 
 class Game {
 public:
 	static SDL_Renderer* renderer;
+	static AssetManager* assetManager;
 
 	Game();
 

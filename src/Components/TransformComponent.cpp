@@ -18,12 +18,5 @@ void TransformComponent::update(float deltaTime) {
 }
 
 void TransformComponent::render() {
-	SDL_Rect transformRect = {
-			(int)position.getX(),
-			(int)position.getY(),
-			width,
-			height
-	};
-	SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
-	SDL_RenderFillRect(Game::renderer, &transformRect);
+
 }

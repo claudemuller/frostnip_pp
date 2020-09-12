@@ -33,7 +33,7 @@ public:
 
 	template <typename T>
 	T* getComponent() {
-		return static_case<T*>(componentTypeMap[&typeid(T)]);
+		return static_cast<T*>(componentTypeMap[&typeid(T)]);
 	}
 
 private:

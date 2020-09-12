@@ -3,8 +3,10 @@
 #include "Vec2.h"
 #include "EntityManager.h"
 #include "Components/TransformComponent.h"
+#include "Components/SpriteComponent.h"
 
 EntityManager entityManager;
+AssetManager* Game::assetManager = new AssetManager(&entityManager);
 SDL_Renderer* Game::renderer;
 
 Game::Game() {
@@ -62,8 +64,14 @@ void Game::processInput() {
 }
 
 void Game::loadLevel(int levelNumber) {
-	Entity& newEntity(entityManager.addEntity("test"));
-	newEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+	// Add assets to asset manager.
+	std::string textureFilePath = "./assets/images/tank-big-right.png";
+	assetManager->addTexture("tank-image", textureFilePath.c_str());
+
+	// Add components to entities and entities to entity manager.
+	Entity& tank(entityManager.addEntity("tank"));
+	tank.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
+	tank.addComponent<SpriteComponent>("tank-image");
 }
 
 void Game::update() {

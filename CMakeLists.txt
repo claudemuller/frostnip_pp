@@ -14,6 +14,7 @@ add_executable(frostnip_pp src/main.cpp
         src/AssetManager.cpp src/AssetManager.h
         src/Component.h
         src/Components/TransformComponent.cpp src/Components/TransformComponent.h
+        src/Components/SpriteComponent.cpp src/Components/SpriteComponent.h
         src/Constants.h)
 
 # Tells CMake that the find scripts are inside inside subfolder /cmake

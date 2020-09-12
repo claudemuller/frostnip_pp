@@ -1,6 +1,7 @@
 #ifndef FROSTNIP_PP_TEXTUREMANAGER_H
 #define FROSTNIP_PP_TEXTUREMANAGER_H
 
+#include <iostream>
 #include "Game.h"
 
 class TextureManager {
