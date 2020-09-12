@@ -25,6 +25,7 @@ public:
 	void update();
 	void render();
 	void handleCameraMovement();
+	void checkCollisions();
 	void destroy();
 	bool isRunning() const { return running; };
 

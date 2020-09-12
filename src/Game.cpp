@@ -5,6 +5,7 @@
 #include "Components/TransformComponent.h"
 #include "Components/SpriteComponent.h"
 #include "Components/KeyboardControlComponent.h"
+#include "Components/ColliderComponent.h"
 #include "Map.h"
 
 EntityManager entityManager;
@@ -82,10 +83,26 @@ void Game::loadLevel(int levelNumber) {
 	Entity& tankEntity(entityManager.addEntity("tank", ENEMY_LAYER));
 	tankEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 	tankEntity.addComponent<SpriteComponent>("tank-image");
+	TransformComponent* tankTransform = tankEntity.getComponent<TransformComponent>();
+	tankEntity.addComponent<ColliderComponent>(
+			"enemy",
+			tankTransform->position.getX(),
+			tankTransform->position.getY(),
+			tankTransform->width,
+			tankTransform->height
+	);
 
 	player.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1, 10);
 	player.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
 	player.addComponent<KeyboardControlComponent>("w", "s", "d", "a", "space");
+	TransformComponent* playerTransform = player.getComponent<TransformComponent>();
+	player.addComponent<ColliderComponent>(
+			"player",
+			playerTransform->position.getX(),
+			playerTransform->position.getY(),
+			playerTransform->width,
+			playerTransform->height
+	);
 
 	Entity& radarUI(entityManager.addEntity("radar-ui", UI_LAYER));
 	radarUI.addComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
@@ -110,6 +127,7 @@ void Game::update() {
 	lastFrameTime = SDL_GetTicks();
 
 	entityManager.update(deltaTime);
+	checkCollisions();
 
 	handleCameraMovement();
 }
@@ -136,6 +154,13 @@ void Game::handleCameraMovement() {
 	camera.y = playerTransform->position.getY() - (WINDOW_WIDTH / 2);
 	camera.y = camera.y < 0 ? 0 : camera.y;
 	camera.y = camera.y > WINDOW_HEIGHT ? WINDOW_HEIGHT : camera.y;
+}
+
+void Game::checkCollisions() {
+	std::string collisionTag = entityManager.checkEntityCollisions(player);
+	if (collisionTag == "enemy") {
+		running = false;
+	}
 }
 
 void Game::destroy() {

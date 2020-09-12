@@ -13,12 +13,14 @@ add_executable(frostnip_pp src/main.cpp
         src/TextureManager.cpp src/TextureManager.h
         src/AssetManager.cpp src/AssetManager.h
         src/Animation.cpp src/Animation.h
+        src/Collision.cpp src/Collision.h
         src/Map.cpp src/Map.h
         src/Component.h
         src/Components/TransformComponent.cpp src/Components/TransformComponent.h
         src/Components/SpriteComponent.cpp src/Components/SpriteComponent.h
         src/Components/KeyboardControlComponent.cpp src/Components/KeyboardControlComponent.cpp
         src/Components/TileComponent.cpp src/Components/TileComponent.cpp
+        src/Components/ColliderComponent.cpp src/Components/ColliderComponent.cpp
         src/Constants.h)
 
 # Tells CMake that the find scripts are inside inside subfolder /cmake
