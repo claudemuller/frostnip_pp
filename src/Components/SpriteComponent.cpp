@@ -52,8 +52,8 @@ void SpriteComponent::update(float deltaTime) {
 	}
 	srcRect.y = animationIndex * transform->height;
 
-	dstRect.x = static_cast<int>(transform->position.getX());
-	dstRect.y = static_cast<int>(transform->position.getY());
+	dstRect.x = static_cast<int>(transform->position.getX()) - (fixed ? 0 : Game::camera.x);
+	dstRect.y = static_cast<int>(transform->position.getY()) - (fixed ? 0 : Game::camera.y);
 	dstRect.w = transform->width * transform->scale;
 	dstRect.h = transform->height * transform->scale;
 }

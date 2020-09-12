@@ -24,7 +24,8 @@ TileComponent::~TileComponent() {
 }
 
 void TileComponent::update(float deltaTime) {
-
+	dstRect.x = position.getX() - Game::camera.x;
+	dstRect.y = position.getY() - Game::camera.y;
 }
 
 void TileComponent::render() {

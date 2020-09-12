@@ -3,7 +3,7 @@
 
 int main() {
 	Game* game = new Game();
-	game->init(SCREEN_WIDTH, SCREEN_HEIGHT);
+	game->init(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	while (game->isRunning()) {
 		game->processInput();

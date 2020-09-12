@@ -11,6 +11,7 @@ EntityManager entityManager;
 AssetManager* Game::assetManager = new AssetManager(&entityManager);
 SDL_Renderer* Game::renderer;
 SDL_Event Game::event;
+SDL_Rect Game::camera = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 Map* map;
 
 Game::Game() {
@@ -66,6 +67,7 @@ void Game::processInput() {
 	}
 }
 
+Entity& player(entityManager.addEntity("chopper", PLAYER_LAYER));
 void Game::loadLevel(int levelNumber) {
 	// Add assets to asset manager.
 	assetManager->addTexture("tank-image", std::string("./assets/images/tank-big-right.png").c_str());
@@ -81,10 +83,9 @@ void Game::loadLevel(int levelNumber) {
 	tankEntity.addComponent<TransformComponent>(0, 0, 20, 20, 32, 32, 1);
 	tankEntity.addComponent<SpriteComponent>("tank-image");
 
-	Entity& chopperEntity(entityManager.addEntity("chopper", PLAYER_LAYER));
-	chopperEntity.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1, 10);
-	chopperEntity.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
-	chopperEntity.addComponent<KeyboardControlComponent>("w", "s", "d", "a", "space");
+	player.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1, 10);
+	player.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
+	player.addComponent<KeyboardControlComponent>("w", "s", "d", "a", "space");
 
 	Entity& radarUI(entityManager.addEntity("radar-ui", UI_LAYER));
 	radarUI.addComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
@@ -109,6 +110,8 @@ void Game::update() {
 	lastFrameTime = SDL_GetTicks();
 
 	entityManager.update(deltaTime);
+
+	handleCameraMovement();
 }
 
 void Game::render() {
@@ -123,9 +126,20 @@ void Game::render() {
 	SDL_RenderPresent(renderer);
 }
 
+void Game::handleCameraMovement() {
+	TransformComponent* playerTransform = player.getComponent<TransformComponent>();
+
+	camera.x = playerTransform->position.getX() - (WINDOW_WIDTH / 2);
+	camera.x = camera.x < 0 ? 0 : camera.x;
+	camera.x = camera.x > WINDOW_WIDTH ? WINDOW_WIDTH : camera.x;
+
+	camera.y = playerTransform->position.getY() - (WINDOW_WIDTH / 2);
+	camera.y = camera.y < 0 ? 0 : camera.y;
+	camera.y = camera.y > WINDOW_HEIGHT ? WINDOW_HEIGHT : camera.y;
+}
+
 void Game::destroy() {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
-

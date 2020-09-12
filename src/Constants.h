@@ -4,8 +4,8 @@
 #define FPS 60
 #define FRAME_TARGET_TIME (1000 / FPS)
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
 
 #define DEBUG false
 
