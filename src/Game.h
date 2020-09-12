@@ -14,6 +14,7 @@ class Game {
 public:
 	static SDL_Renderer* renderer;
 	static AssetManager* assetManager;
+	static SDL_Event event;
 
 	Game();
 

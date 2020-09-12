@@ -7,4 +7,6 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
+#define DEBUG false
+
 #endif //FROSTNIP_PP_CONSTANTS_H

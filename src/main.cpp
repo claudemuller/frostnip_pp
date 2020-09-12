@@ -2,7 +2,7 @@
 #include "Game.h"
 
 int main() {
-	Game *game = new Game();
+	Game* game = new Game();
 	game->init(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	while (game->isRunning()) {

@@ -4,10 +4,14 @@
 #include "EntityManager.h"
 #include "Components/TransformComponent.h"
 #include "Components/SpriteComponent.h"
+#include "Components/KeyboardControlComponent.h"
+#include "Map.h"
 
 EntityManager entityManager;
 AssetManager* Game::assetManager = new AssetManager(&entityManager);
 SDL_Renderer* Game::renderer;
+SDL_Event Game::event;
+Map* map;
 
 Game::Game() {
 	running = false;
@@ -44,7 +48,6 @@ void Game::init(int width, int height) {
 }
 
 void Game::processInput() {
-	SDL_Event event;
 	SDL_PollEvent(&event);
 	switch (event.key.type) {
 		case SDL_QUIT: {
@@ -68,6 +71,10 @@ void Game::loadLevel(int levelNumber) {
 	assetManager->addTexture("tank-image", std::string("./assets/images/tank-big-right.png").c_str());
 	assetManager->addTexture("chopper-image", std::string("./assets/images/chopper-spritesheet.png").c_str());
 	assetManager->addTexture("radar-image", std::string("./assets/images/radar.png").c_str());
+	assetManager->addTexture("jungle-tiletexture", std::string("./assets/tilemaps/jungle.png").c_str());
+
+	map = new Map("jungle-tiletexture", 1, 32);
+	map->loadMap("./assets/tilemaps/jungle.map", 25, 20);
 
 	// Add components to entities and entities to entity manager.
 	Entity& tankEntity(entityManager.addEntity("tank"));
@@ -77,6 +84,7 @@ void Game::loadLevel(int levelNumber) {
 	Entity& chopperEntity(entityManager.addEntity("chopper"));
 	chopperEntity.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1);
 	chopperEntity.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
+	chopperEntity.addComponent<KeyboardControlComponent>("w", "s", "d", "a", "space");
 
 	Entity& radarUI(entityManager.addEntity("radar-ui"));
 	radarUI.addComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);

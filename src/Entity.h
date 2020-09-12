@@ -7,6 +7,7 @@
 #include "Component.h"
 
 class EntityManager;
+
 class Component;
 
 class Entity {
@@ -22,8 +23,8 @@ public:
 	bool isActive() const { return active; };
 	void listComponents();
 
-	template <typename T, typename... TArgs>
-	T& addComponent(TArgs&&... args) {
+	template<typename T, typename... TArgs>
+	T& addComponent(TArgs&& ... args) {
 		T* newComponent(new T(std::forward<TArgs>(args)...));
 		newComponent->owner = this;
 		components.emplace_back(newComponent);
@@ -32,7 +33,7 @@ public:
 		return *newComponent;
 	}
 
-	template <typename T>
+	template<typename T>
 	T* getComponent() {
 		return static_cast<T*>(componentTypeMap[&typeid(T)]);
 	}

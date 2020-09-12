@@ -33,6 +33,3 @@ void Entity::listComponents() {
 	}
 }
 
-//std::map<const std::type_info*, Component*> Entity::getComponentTypes() {
-//	return componentTypeMap;
-//}

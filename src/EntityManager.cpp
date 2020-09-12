@@ -1,5 +1,6 @@
 #include <iostream>
 #include "EntityManager.h"
+#include "Constants.h"
 
 void EntityManager::clearData() {
 	for (auto& entity : entities) {
@@ -38,10 +39,12 @@ unsigned int EntityManager::getEntityCount() {
 }
 
 void EntityManager::listEntities() const {
-	unsigned int i = 0;
-	for (auto& entity : entities) {
-		std::cout << "Entity[" << i << "]: " << entity->name << std::endl;
-		entity->listComponents();
-		i++;
+	if (DEBUG) {
+		unsigned int i = 0;
+		for (auto& entity : entities) {
+			std::cout << "Entity[" << i << "]: " << entity->name << std::endl;
+			entity->listComponents();
+			i++;
+		}
 	}
 }
