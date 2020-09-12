@@ -12,5 +12,4 @@ void TransformComponent::update(float deltaTime) {
 }
 
 void TransformComponent::render() {
-
 }
