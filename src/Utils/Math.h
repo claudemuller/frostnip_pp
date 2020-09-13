@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_MATH_H
-#define FROSTNIP_PP_MATH_H
+#ifndef FROSTBYTE_MATH_H
+#define FROSTBYTE_MATH_H
 
 #include <cmath>
 #include "Vec2.h"
@@ -15,4 +15,4 @@ public:
 	}
 };
 
-#endif //FROSTNIP_PP_MATH_H
+#endif //FROSTBYTE_MATH_H

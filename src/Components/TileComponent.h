@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_TILECOMPONENT_H
-#define FROSTNIP_PP_TILECOMPONENT_H
+#ifndef FROSTBYTE_TILECOMPONENT_H
+#define FROSTBYTE_TILECOMPONENT_H
 
 #include <SDL.h>
 #include "../Utils/Vec2.h"
@@ -19,4 +19,4 @@ public:
 	void render() override;
 };
 
-#endif //FROSTNIP_PP_TILECOMPONENT_H
+#endif //FROSTBYTE_TILECOMPONENT_H

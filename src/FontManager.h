@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_FONTMANAGER_H
-#define FROSTNIP_PP_FONTMANAGER_H
+#ifndef FROSTBYTE_FONTMANAGER_H
+#define FROSTBYTE_FONTMANAGER_H
 
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -10,4 +10,4 @@ public:
 	static void draw(SDL_Texture* texture, SDL_Rect position);
 };
 
-#endif //FROSTNIP_PP_FONTMANAGER_H
+#endif //FROSTBYTE_FONTMANAGER_H

@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_SPRITECOMPONENT_H
-#define FROSTNIP_PP_SPRITECOMPONENT_H
+#ifndef FROSTBYTE_SPRITECOMPONENT_H
+#define FROSTBYTE_SPRITECOMPONENT_H
 
 #include <SDL.h>
 #include "../TextureManager.h"
@@ -34,4 +34,4 @@ private:
 	unsigned int animationIndex = 0;
 };
 
-#endif //FROSTNIP_PP_SPRITECOMPONENT_H
+#endif //FROSTBYTE_SPRITECOMPONENT_H

@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.17)
-project(frostnip_pp)
+project(frostbyte)
 
 set(CMAKE_CXX_STANDARD 14)
 
 # Adds the files that are part of the project
-add_executable(frostnip_pp src/main.cpp src/Constants.h
+add_executable(frostbyte src/main.cpp src/Constants.h
         src/Utils/Benchmark.cpp src/Utils/Benchmark.h
         src/Game.cpp src/Game.h
         src/Utils/Utils.cpp src/Utils/Utils.h
@@ -28,7 +28,7 @@ add_executable(frostnip_pp src/main.cpp src/Constants.h
         )
 
 # Tells CMake that the find scripts are inside inside subfolder /cmake
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${frostnip_pp_SOURCE_DIR}/cmake")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${frostbyte_SOURCE_DIR}/cmake")
 
 # Asks CMake to find the SDL libraries in our system
 find_package(SDL2 REQUIRED)
@@ -44,7 +44,7 @@ include_directories(
         ${LUA_INCLUDE_DIR})
 
 # Asks CMake to link against the libraries during build
-target_link_libraries(frostnip_pp
+target_link_libraries(frostbyte
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARIES}
         ${SDL2_TTF_LIBRARIES}

@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_ANIMATION_H
-#define FROSTNIP_PP_ANIMATION_H
+#ifndef FROSTBYTE_ANIMATION_H
+#define FROSTBYTE_ANIMATION_H
 
 class Animation {
 public:
@@ -11,4 +11,4 @@ public:
 	unsigned int speed;
 };
 
-#endif //FROSTNIP_PP_ANIMATION_H
+#endif //FROSTBYTE_ANIMATION_H

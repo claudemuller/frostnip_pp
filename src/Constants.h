@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_CONSTANTS_H
-#define FROSTNIP_PP_CONSTANTS_H
+#ifndef FROSTBYTE_CONSTANTS_H
+#define FROSTBYTE_CONSTANTS_H
 
 #include <SDL.h>
 
@@ -32,4 +32,4 @@ const unsigned int NUM_LAYERS = 6;
 const SDL_Color WHITE = {255, 255, 255, 255};
 const SDL_Color GREEN = {0, 255, 0, 255};
 
-#endif //FROSTNIP_PP_CONSTANTS_H
+#endif //FROSTBYTE_CONSTANTS_H

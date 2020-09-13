@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_ENTITY_H
-#define FROSTNIP_PP_ENTITY_H
+#ifndef FROSTBYTE_ENTITY_H
+#define FROSTBYTE_ENTITY_H
 
 #include <vector>
 #include <string>
@@ -53,4 +53,4 @@ private:
 	std::map<const std::type_info*, Component*> componentTypeMap;
 };
 
-#endif //FROSTNIP_PP_ENTITY_H
+#endif //FROSTBYTE_ENTITY_H

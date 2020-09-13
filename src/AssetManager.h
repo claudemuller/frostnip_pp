@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_ASSETMANAGER_H
-#define FROSTNIP_PP_ASSETMANAGER_H
+#ifndef FROSTBYTE_ASSETMANAGER_H
+#define FROSTBYTE_ASSETMANAGER_H
 
 #include <map>
 #include <string>
@@ -23,4 +23,4 @@ private:
 	std::map<std::string, TTF_Font *> fonts;
 };
 
-#endif //FROSTNIP_PP_ASSETMANAGER_H
+#endif //FROSTBYTE_ASSETMANAGER_H

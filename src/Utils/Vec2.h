@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_VEC2D_H
-#define FROSTNIP_PP_VEC2D_H
+#ifndef FROSTBYTE_VEC2D_H
+#define FROSTBYTE_VEC2D_H
 
 #include <iostream>
 
@@ -48,4 +48,4 @@ private:
 	float y;
 };
 
-#endif //FROSTNIP_PP_VEC2D_H
+#endif //FROSTBYTE_VEC2D_H

@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP__BENCHMARK_H
-#define FROSTNIP_PP__BENCHMARK_H
+#ifndef FROSTBYTE__BENCHMARK_H
+#define FROSTBYTE__BENCHMARK_H
 
 class Benchmark {
 public:
@@ -13,4 +13,4 @@ private:
 	static uint32_t c;
 };
 
-#endif //FROSTNIP_PP__BENCHMARK_H
+#endif //FROSTBYTE__BENCHMARK_H
