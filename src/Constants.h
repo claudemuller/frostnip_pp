@@ -1,11 +1,13 @@
 #ifndef FROSTNIP_PP_CONSTANTS_H
 #define FROSTNIP_PP_CONSTANTS_H
 
-#define FPS 60
-#define FRAME_TARGET_TIME (1000 / FPS)
+#include <SDL.h>
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+const unsigned int FPS = 60;
+const unsigned int FRAME_TARGET_TIME = (1000 / FPS);
+
+const unsigned int WINDOW_WIDTH = 800;
+const unsigned int WINDOW_HEIGHT = 600;
 
 enum CollisionType {
 	NO_COLLISION,
@@ -26,5 +28,8 @@ enum LayerType {
 };
 
 const unsigned int NUM_LAYERS = 6;
+
+const SDL_Color WHITE = {255, 255, 255, 255};
+const SDL_Color GREEN = {0, 255, 0, 255};
 
 #endif //FROSTNIP_PP_CONSTANTS_H
