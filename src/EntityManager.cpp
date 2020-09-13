@@ -38,6 +38,15 @@ std::vector<Entity*> EntityManager::getEntities() const {
 	return entities;
 }
 
+Entity* EntityManager::getEntity(const std::string& entityId) const {
+	for (auto& entity : entities) {
+		if (entity->name == entityId) {
+			return entity;
+		}
+	}
+	return NULL;
+}
+
 std::vector<Entity*> EntityManager::getEntitiesByLayer(LayerType layer) const {
 	std::vector<Entity*> selectedEntities;
 	for (auto& entity : entities) {

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "Game.h"
 #include "Vec2.h"
 #include "EntityManager.h"
@@ -143,19 +144,32 @@ void Game::loadLevel(int levelNumber) {
 	Entity& lblLevelName(entityManager.addEntity("ui-level-name", UI_LAYER));
 	lblLevelName.addComponent<TextLabelComponent>(10, 10, "First Level...", "charriot-font", WHITE);
 
+	Entity& lblFPS(entityManager.addEntity("ui-level-name", UI_LAYER));
+	lblFPS.addComponent<TextLabelComponent>(10, 10, "", "charriot-font", WHITE);
+
 	entityManager.listEntities();
 }
 
 void Game::update() {
 	int waited_for = SDL_GetTicks();
 	// Sleep the execution until the target time in milliseconds is reached.
-	int timeToWait = FRAME_TARGET_TIME - (SDL_GetTicks() - lastFrameTime);
+	int timeToWait = FRAME_TARGET_TIME - SDL_GetTicks() - lastFrameTime;
 	// Only call delay if processing is too fast in the current frame.
 	if (timeToWait > 0 && timeToWait <= FRAME_TARGET_TIME) {
 		SDL_Delay(timeToWait);
 	}
-//	printf("FPS: %d\n", lastFrameTime - waited_for);
-	float deltaTime = (float)(SDL_GetTicks() - lastFrameTime) / 1000.0f;
+	currentFPS = (float)(SDL_GetTicks() - lastFrameTime);
+
+	// TODO: rather control this with a DEBUG_LAYER.
+	if (Game::debug) {
+		Entity* lblFPS = entityManager.getEntity("ui-level-name");
+		if (lblFPS != NULL) {
+			TextLabelComponent* lblFPSText = lblFPS->getComponent<TextLabelComponent>();
+			lblFPSText->setLabelText(std::to_string(currentFPS), "charriot-font");
+		}
+	}
+
+	float deltaTime = currentFPS / 1000.0f;
 	// Clamp deltaTime to a maximum value
 	deltaTime = deltaTime > 0.05f ? 0.05f : deltaTime;
 	// Sets the new ticks fo the current frame to be used in the next pass

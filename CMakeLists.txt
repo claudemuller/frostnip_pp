@@ -47,5 +47,3 @@ target_link_libraries(frostnip_pp
         ${SDL2_IMAGE_LIBRARIES}
         ${SDL2_TTF_LIBRARIES}
         ${LUA_LIBRARIES})
-
-#add_executable(frostnip_pp_new src/main.cpp)

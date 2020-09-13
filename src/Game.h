@@ -36,6 +36,7 @@ private:
 	SDL_Window* window;
 	bool running;
 	int lastFrameTime = 0;
+	float currentFPS = 0.0;
 };
 
 #endif //FROSTNIP_PP_GAME_H

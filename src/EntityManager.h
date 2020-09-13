@@ -13,6 +13,7 @@ public:
 	bool hasEntities();
 	Entity& addEntity(std::string name, LayerType layer);
 	std::vector<Entity*> getEntities() const;
+	Entity* getEntity(const std::string& entityId) const;
 	std::vector<Entity*> getEntitiesByLayer(LayerType layer) const;
 	unsigned int getEntityCount();
 	void listEntities() const;

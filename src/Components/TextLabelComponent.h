@@ -12,7 +12,7 @@ class TextLabelComponent : public Component {
 public:
 	TextLabelComponent(int x, int y, std::string text, std::string fontFamily, SDL_Color colour);
 
-	void setLabelText(std::string text, std::string fontFamily);
+	void setLabelText(std::string text, std::string fontId);
 	void render() override;
 
 private:
