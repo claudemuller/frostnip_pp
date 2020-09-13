@@ -1,7 +1,7 @@
 #ifndef FROSTNIP_PP_SPRITECOMPONENT_H
 #define FROSTNIP_PP_SPRITECOMPONENT_H
 
-#include "SDL.h"
+#include <SDL.h>
 #include "../TextureManager.h"
 #include "../AssetManager.h"
 #include "TransformComponent.h"

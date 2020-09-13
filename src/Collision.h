@@ -1,7 +1,7 @@
 #ifndef FROSTNIP_PP_COLLISION_H
 #define FROSTNIP_PP_COLLISION_H
 
-#include "SDL.h"
+#include <SDL.h>
 
 class Collision {
 public:

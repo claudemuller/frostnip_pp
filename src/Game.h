@@ -1,9 +1,9 @@
 #ifndef FROSTNIP_PP_GAME_H
 #define FROSTNIP_PP_GAME_H
 
-#include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_ttf.h"
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
 #include "Constants.h"
 #include "EntityManager.h"
 #include "Entity.h"

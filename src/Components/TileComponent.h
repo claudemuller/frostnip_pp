@@ -1,7 +1,7 @@
 #ifndef FROSTNIP_PP_TILECOMPONENT_H
 #define FROSTNIP_PP_TILECOMPONENT_H
 
-#include "SDL.h"
+#include <SDL.h>
 #include "../Vec2.h"
 #include "../Component.h"
 
