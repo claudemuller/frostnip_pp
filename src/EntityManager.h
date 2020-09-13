@@ -10,6 +10,7 @@ public:
 	void clearData();
 	void update(float deltaTime);
 	void render();
+	void destroyEntityAt(const int loc);
 	bool hasEntities();
 	Entity& addEntity(std::string name, LayerType layer);
 	std::vector<Entity*> getEntities() const;

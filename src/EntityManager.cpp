@@ -11,8 +11,13 @@ void EntityManager::clearData() {
 }
 
 void EntityManager::update(float deltaTime) {
-	for (auto& entity : entities) {
-		entity->update(deltaTime);
+	for (int i = 0; i < entities.size(); i++) {
+		Entity* entity = entities[i];
+		if (entity->isActive()) {
+			entity->update(deltaTime);
+		} else {
+			destroyEntityAt(i);
+		}
 	}
 }
 
@@ -22,6 +27,10 @@ void EntityManager::render() {
 			entity->render();
 		}
 	}
+}
+
+void EntityManager::destroyEntityAt(const int loc) {
+	entities.erase(entities.begin() + loc);
 }
 
 bool EntityManager::hasEntities() {

@@ -10,6 +10,7 @@
 #include "Components/KeyboardControlComponent.h"
 #include "Components/ColliderComponent.h"
 #include "Components/TextLabelComponent.h"
+#include "Components/ProjectileEmitterComponent.h"
 
 EntityManager entityManager;
 AssetManager* Game::assetManager = new AssetManager(&entityManager);
@@ -124,7 +125,7 @@ void Game::loadLevel(int levelNumber) {
 	projectile.addComponent<TransformComponent>(150+16, 495+16, 0, 0, 4, 4, 1);
 	projectile.addComponent<SpriteComponent>("projectile-image");
 	projectile.addComponent<ColliderComponent>("projectile", 150+16, 495+16, 4, 4);
-//	projectile.addComponent<ProjectilEmitterComponent>(50, 270, 200, true);
+	projectile.addComponent<ProjectileEmitterComponent>(50, 270, 200, true);
 
 	player.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1, 10);
 	player.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
