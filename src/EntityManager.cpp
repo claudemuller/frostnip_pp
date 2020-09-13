@@ -85,8 +85,24 @@ void EntityManager::listEntities() const {
 CollisionType EntityManager::checkCollisions() const {
 	for (auto& thisEntity : entities) {
 		if (thisEntity->hasComponent<ColliderComponent>()) {
-
 			ColliderComponent* thisCollider = thisEntity->getComponent<ColliderComponent>();
+			TransformComponent* t = thisEntity->getComponent<TransformComponent>();
+
+			if (t->position.getX() > WINDOW_WIDTH*2 - t->width || t->position.getX() < 0) {
+				if (thisCollider->tag == "PLAYER") {
+					// TODO: finish me.
+				} else {
+					t->velocity.setX(-t->velocity.getX());
+				}
+			}
+			if (t->position.getY() > WINDOW_HEIGHT*2 - t->height || t->position.getY() < 0) {
+				if (thisCollider->tag == "PLAYER") {
+					// TODO: finish me.
+				} else {
+					t->velocity.setY(-t->velocity.getY());
+				}
+			}
+
 			for (auto& thatEntity : entities) {
 				if (thisEntity->name != thatEntity->name && thatEntity->hasComponent<ColliderComponent>()) {
 
@@ -94,15 +110,15 @@ CollisionType EntityManager::checkCollisions() const {
 					if (Collision::checkRectangleCollision(thisCollider->collider, thatCollider->collider)) {
 
 						if (thisCollider->tag == "PLAYER" && thatCollider->tag == "ENEMY") {
-							return PLAYER_ENEMY_COLLISION;
+							return NO_COLLISION;//PLAYER_ENEMY_COLLISION;
 						}
 
 						if (thisCollider->tag == "PLAYER" && thatCollider->tag == "PROJECTILE") {
-							return PLAYER_PROJECTILE_COLLISION;
+							return NO_COLLISION;//PLAYER_PROJECTILE_COLLISION;
 						}
 
 						if (thisCollider->tag == "PLAYER" && thatCollider->tag == "LEVEL_COMPLETE") {
-							return PLAYER_LEVEL_COMPLETE_COLLISION;
+							return NO_COLLISION;//PLAYER_LEVEL_COMPLETE_COLLISION;
 						}
 
 						if (thisCollider->tag == "ENEMY" && thatCollider->tag == "FRIENDLY_PROJECTILE") {

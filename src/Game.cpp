@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <random>
 #include "Utils/Benchmark.h"
 #include "Utils/Vec2.h"
 #include "Game.h"
@@ -19,6 +20,13 @@ SDL_Event Game::event;
 SDL_Rect Game::camera = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 Map* map;
 bool Game::debug;
+
+
+// TODO: test.
+std::default_random_engine generator;
+std::uniform_real_distribution<double> randomX(0, WINDOW_WIDTH*2 - 32);
+std::uniform_real_distribution<double> randomY(0, WINDOW_HEIGHT*2 - 32);
+
 
 Game::Game() {
 	running = false;
@@ -124,7 +132,7 @@ void Game::loadLevel(int levelNumber) {
 	Entity& projectile(entityManager.addEntity("projectile", PROJECTILE_LAYER));
 	projectile.addComponent<TransformComponent>(150+16, 495+16, 0, 0, 4, 4, 1);
 	projectile.addComponent<SpriteComponent>("projectile-image");
-	projectile.addComponent<ColliderComponent>("projectile", 150+16, 495+16, 4, 4);
+	projectile.addComponent<ColliderComponent>("PROJECTILE", 150+16, 495+16, 4, 4);
 	projectile.addComponent<ProjectileEmitterComponent>(50, 270, 200, true);
 
 	player.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1, 10);
@@ -159,6 +167,21 @@ void Game::loadLevel(int levelNumber) {
 
 	Entity& lblFPS(entityManager.addEntity("ui-level-name", UI_LAYER));
 	lblFPS.addComponent<TextLabelComponent>(10, 10, "", "charriot-font", WHITE);
+
+
+	// Simulate many entities.
+//	int dir = -1;
+//	for (int i = 0; i < 1000; i++) {
+//		Entity& te(entityManager.addEntity("tank" + std::to_string(i), ENEMY_LAYER));
+//		int speed = 20;
+//		int x = randomX(generator);
+//		int y = randomY(generator);
+//		dir = dir == -1 ? 1 : -1;
+//		te.addComponent<TransformComponent>(x, y, speed * dir, speed * dir, 32, 32, 1);
+//		te.addComponent<SpriteComponent>("tank-image");
+//		te.addComponent<ColliderComponent>("ENEMY", x, y, 32, 32);
+//	}
+
 
 	entityManager.listEntities();
 }
@@ -222,7 +245,7 @@ void Game::handleCameraMovement() {
 
 void Game::checkCollisions() {
 	CollisionType collisionType = entityManager.checkCollisions();
-	if (collisionType == PLAYER_ENEMY_COLLISION) {
+	if (collisionType == PLAYER_ENEMY_COLLISION || collisionType == PLAYER_PROJECTILE_COLLISION) {
 		processGameOver();
 	} else if (collisionType == PLAYER_LEVEL_COMPLETE_COLLISION) {
 		processNextLevel(1);
