@@ -1,5 +1,5 @@
-Frostnip++
+Frostbyte
 ==========================================
-[![CodeFactor](https://www.codefactor.io/repository/github/claudemuller/frostnip_pp/badge)](https://www.codefactor.io/repository/github/claudemuller/frostnip_pp)
+[![CodeFactor](https://www.codefactor.io/repository/github/claudemuller/frostbyte/badge)](https://www.codefactor.io/repository/github/claudemuller/frostbyte)
 
-Frostnip++ is a 2D game engine written in C++ with SDL2.
+Frostbyte is a 2D game engine written in C++ with SDL2.

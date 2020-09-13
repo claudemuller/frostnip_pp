@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_COMPONENT_H
-#define FROSTNIP_PP_COMPONENT_H
+#ifndef FROSTBYTE_COMPONENT_H
+#define FROSTBYTE_COMPONENT_H
 
 class Entity;
 
@@ -12,4 +12,4 @@ public:
 	virtual void render() {};
 };
 
-#endif //FROSTNIP_PP_COMPONENT_H
+#endif //FROSTBYTE_COMPONENT_H

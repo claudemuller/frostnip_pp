@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_GAME_H
-#define FROSTNIP_PP_GAME_H
+#ifndef FROSTBYTE_GAME_H
+#define FROSTBYTE_GAME_H
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -39,4 +39,4 @@ private:
 	float currentFPS = 0.0;
 };
 
-#endif //FROSTNIP_PP_GAME_H
+#endif //FROSTBYTE_GAME_H

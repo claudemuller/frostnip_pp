@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_COLLIDERCOMPONENT_H
-#define FROSTNIP_PP_COLLIDERCOMPONENT_H
+#ifndef FROSTBYTE_COLLIDERCOMPONENT_H
+#define FROSTBYTE_COLLIDERCOMPONENT_H
 
 #include "../Game.h"
 #include "../EntityManager.h"
@@ -20,4 +20,4 @@ public:
 	void render() override;
 };
 
-#endif //FROSTNIP_PP_COLLIDERCOMPONENT_H
+#endif //FROSTBYTE_COLLIDERCOMPONENT_H

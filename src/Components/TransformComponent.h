@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_TRANSFORMCOMPONENT_H
-#define FROSTNIP_PP_TRANSFORMCOMPONENT_H
+#ifndef FROSTBYTE_TRANSFORMCOMPONENT_H
+#define FROSTBYTE_TRANSFORMCOMPONENT_H
 
 #include "../EntityManager.h"
 #include "../Utils/Vec2.h"
@@ -21,4 +21,4 @@ public:
 	void render() override;
 };
 
-#endif //FROSTNIP_PP_TRANSFORMCOMPONENT_H
+#endif //FROSTBYTE_TRANSFORMCOMPONENT_H

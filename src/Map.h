@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_MAP_H
-#define FROSTNIP_PP_MAP_H
+#ifndef FROSTBYTE_MAP_H
+#define FROSTBYTE_MAP_H
 
 #include <string>
 
@@ -16,4 +16,4 @@ private:
 	int tileSize;
 };
 
-#endif //FROSTNIP_PP_MAP_H
+#endif //FROSTBYTE_MAP_H

@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_ENTITYMANAGER_H
-#define FROSTNIP_PP_ENTITYMANAGER_H
+#ifndef FROSTBYTE_ENTITYMANAGER_H
+#define FROSTBYTE_ENTITYMANAGER_H
 
 #include <vector>
 #include "Entity.h"
@@ -24,4 +24,4 @@ private:
 	std::vector<Entity*> entities;
 };
 
-#endif //FROSTNIP_PP_ENTITYMANAGER_H
+#endif //FROSTBYTE_ENTITYMANAGER_H

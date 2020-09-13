@@ -1,5 +1,5 @@
-#ifndef FROSTNIP_PP_TEXTUREMANAGER_H
-#define FROSTNIP_PP_TEXTUREMANAGER_H
+#ifndef FROSTBYTE_TEXTUREMANAGER_H
+#define FROSTBYTE_TEXTUREMANAGER_H
 
 #include <iostream>
 #include "Game.h"
@@ -10,4 +10,4 @@ public:
 	static void draw(SDL_Texture* texture, SDL_Rect srcRect, SDL_Rect dstRect, SDL_RendererFlip flip);
 };
 
-#endif //FROSTNIP_PP_TEXTUREMANAGER_H
+#endif //FROSTBYTE_TEXTUREMANAGER_H
