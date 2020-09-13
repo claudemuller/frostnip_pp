@@ -63,18 +63,40 @@ void EntityManager::listEntities() const {
 	}
 }
 
-std::string EntityManager::checkEntityCollisions(Entity& thisEntity) const {
-	ColliderComponent* thisCollider = thisEntity.getComponent<ColliderComponent>();
-	for (auto& entity : entities) {
-		if (entity->name == thisEntity.name) {
-			continue;
-		}
-		if (entity->hasComponent<ColliderComponent>() && entity->name != "tile") {
-			ColliderComponent* thatCollider = entity->getComponent<ColliderComponent>();
-			if (Collision::checkRectangleCollision(thisCollider->collider, thatCollider->collider)) {
-				return thatCollider->tag;
+// TODO: better collision here.
+CollisionType EntityManager::checkCollisions() const {
+	for (auto& thisEntity : entities) {
+		if (thisEntity->hasComponent<ColliderComponent>()) {
+
+			ColliderComponent* thisCollider = thisEntity->getComponent<ColliderComponent>();
+			for (auto& thatEntity : entities) {
+				if (thisEntity->name != thatEntity->name && thatEntity->hasComponent<ColliderComponent>()) {
+
+					ColliderComponent* thatCollider = thatEntity->getComponent<ColliderComponent>();
+					if (Collision::checkRectangleCollision(thisCollider->collider, thatCollider->collider)) {
+
+						if (thisCollider->tag == "PLAYER" && thatCollider->tag == "ENEMY") {
+							return PLAYER_ENEMY_COLLISION;
+						}
+
+						if (thisCollider->tag == "PLAYER" && thatCollider->tag == "PROJECTILE") {
+							return PLAYER_PROJECTILE_COLLISION;
+						}
+
+						if (thisCollider->tag == "PLAYER" && thatCollider->tag == "LEVEL_COMPLETE") {
+							return PLAYER_LEVEL_COMPLETE_COLLISION;
+						}
+
+						if (thisCollider->tag == "ENEMY" && thatCollider->tag == "FRIENDLY_PROJECTILE") {
+							return ENEMY_PROJECTILE_COLLISION;
+						}
+
+					}
+
+				}
 			}
+
 		}
 	}
-	return "";
+	return NO_COLLISION;
 }

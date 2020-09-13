@@ -29,6 +29,8 @@ public:
 	void checkCollisions();
 	void destroy();
 	bool isRunning() const { return running; };
+	void processGameOver();
+	void processNextLevel(int level);
 
 private:
 	SDL_Window* window;

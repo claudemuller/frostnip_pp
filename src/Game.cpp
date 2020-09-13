@@ -88,6 +88,7 @@ void Game::loadLevel(int levelNumber) {
 	assetManager->addTexture("chopper-image", std::string("./assets/images/chopper-spritesheet.png").c_str());
 	assetManager->addTexture("radar-image", std::string("./assets/images/radar.png").c_str());
 	assetManager->addTexture("jungle-tiletexture", std::string("./assets/tilemaps/jungle.png").c_str());
+	assetManager->addTexture("heliport-image", std::string("./assets/images/heliport.png").c_str());
 
 	map = new Map("jungle-tiletexture", 2, 32);
 	map->loadMap("./assets/tilemaps/jungle.map", 25, 20);
@@ -98,7 +99,7 @@ void Game::loadLevel(int levelNumber) {
 	tankEntity.addComponent<SpriteComponent>("tank-image");
 	TransformComponent* tankTransform = tankEntity.getComponent<TransformComponent>();
 	tankEntity.addComponent<ColliderComponent>(
-			"enemy",
+			"ENEMY",
 			tankTransform->position.getX(),
 			tankTransform->position.getY(),
 			tankTransform->width,
@@ -110,12 +111,23 @@ void Game::loadLevel(int levelNumber) {
 	player.addComponent<KeyboardControlComponent>("w", "s", "d", "a", "space");
 	TransformComponent* playerTransform = player.getComponent<TransformComponent>();
 	player.addComponent<ColliderComponent>(
-			"player",
+			"PLAYER",
 			playerTransform->position.getX(),
 			playerTransform->position.getY(),
 			playerTransform->width,
 			playerTransform->height
 	);
+
+	Entity& heliport(entityManager.addEntity("heliport", UI_LAYER));
+	struct heliportDims {
+		int x;
+		int y;
+		int w;
+		int h;
+	} heliportDims{470, 420, 32, 32};
+	heliport.addComponent<TransformComponent>(heliportDims.x, heliportDims.y, 0, 0, heliportDims.w, heliportDims.h, 1);
+	heliport.addComponent<SpriteComponent>("heliport-image");
+	heliport.addComponent<ColliderComponent>("LEVEL_COMPLETE", heliportDims.x, heliportDims.y, heliportDims.w, heliportDims.h);
 
 	Entity& radarUI(entityManager.addEntity("radar-ui", UI_LAYER));
 	radarUI.addComponent<TransformComponent>(720, 15, 0, 0, 64, 64, 1);
@@ -141,7 +153,6 @@ void Game::update() {
 
 	entityManager.update(deltaTime);
 	checkCollisions();
-
 	handleCameraMovement();
 }
 
@@ -170,10 +181,22 @@ void Game::handleCameraMovement() {
 }
 
 void Game::checkCollisions() {
-	std::string collisionTag = entityManager.checkEntityCollisions(player);
-	if (collisionTag == "enemy") {
-		running = false;
+	CollisionType collisionType = entityManager.checkCollisions();
+	if (collisionType == PLAYER_ENEMY_COLLISION) {
+		processGameOver();
+	} else if (collisionType == PLAYER_LEVEL_COMPLETE_COLLISION) {
+		processNextLevel(1);
 	}
+}
+
+void Game::processGameOver() {
+	std::cout << "Game over." << std::endl;
+	running = false;
+}
+
+void Game::processNextLevel(int level) {
+	std::cout << "Next level." << std::endl;
+	running = false;
 }
 
 void Game::destroy() {
