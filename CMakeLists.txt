@@ -5,9 +5,10 @@ set(CMAKE_CXX_STANDARD 14)
 
 # Adds the files that are part of the project
 add_executable(frostnip_pp src/main.cpp src/Constants.h
+        src/Utils/Benchmark.cpp src/Utils/Benchmark.h
         src/Game.cpp src/Game.h
-        src/Utils.cpp src/Utils.h
-        src/Vec2.cpp src/Vec2.h
+        src/Utils/Utils.cpp src/Utils/Utils.h
+        src/Utils/Vec2.cpp src/Utils/Vec2.h
         src/Entity.cpp src/Entity.h
         src/EntityManager.cpp src/EntityManager.h
         src/TextureManager.cpp src/TextureManager.h
@@ -23,6 +24,7 @@ add_executable(frostnip_pp src/main.cpp src/Constants.h
         src/Components/TileComponent.cpp src/Components/TileComponent.cpp
         src/Components/ColliderComponent.cpp src/Components/ColliderComponent.cpp
         src/Components/TextLabelComponent.cpp src/Components/TextLabelComponent.cpp
+        src/Components/ProjectileEmitterComponent.cpp src/Components/ProjectileEmitterComponent.h
         )
 
 # Tells CMake that the find scripts are inside inside subfolder /cmake

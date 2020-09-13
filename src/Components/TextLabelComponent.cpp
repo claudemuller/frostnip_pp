@@ -1,5 +1,5 @@
 #include "TextLabelComponent.h"
-#include "../Vec2.h"
+#include "../Utils/Vec2.h"
 
 TextLabelComponent::TextLabelComponent(int x, int y, std::string text, std::string fontFamily, const SDL_Color colour)
 : text(text), fontFamily(fontFamily), colour(colour) {

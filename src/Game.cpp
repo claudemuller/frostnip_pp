@@ -1,13 +1,14 @@
 #include <iostream>
 #include <string>
+#include "Utils/Benchmark.h"
+#include "Utils/Vec2.h"
 #include "Game.h"
-#include "Vec2.h"
+#include "Map.h"
 #include "EntityManager.h"
 #include "Components/TransformComponent.h"
 #include "Components/SpriteComponent.h"
 #include "Components/KeyboardControlComponent.h"
 #include "Components/ColliderComponent.h"
-#include "Map.h"
 #include "Components/TextLabelComponent.h"
 
 EntityManager entityManager;
@@ -16,10 +17,11 @@ SDL_Renderer* Game::renderer;
 SDL_Event Game::event;
 SDL_Rect Game::camera = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
 Map* map;
-bool Game::debug = false;
+bool Game::debug;
 
 Game::Game() {
 	running = false;
+	debug = false;
 }
 
 void Game::init(int width, int height) {
@@ -53,6 +55,9 @@ void Game::init(int width, int height) {
 	}
 
 	loadLevel(0);
+
+	// TODO: If debug?
+	Benchmark::start();
 
 	running = true;
 }
@@ -96,6 +101,7 @@ void Game::loadLevel(int levelNumber) {
 	assetManager->addTexture("radar-image", std::string("./assets/images/radar.png").c_str());
 	assetManager->addTexture("jungle-tiletexture", std::string("./assets/tilemaps/jungle.png").c_str());
 	assetManager->addTexture("heliport-image", std::string("./assets/images/heliport.png").c_str());
+	assetManager->addTexture("projectile-image", std::string("./assets/images/bullet-enemy.png").c_str());
 	assetManager->addFont("charriot-font", std::string("./assets/fonts/charriot.ttf").c_str(), 14);
 
 	map = new Map("jungle-tiletexture", 2, 32);
@@ -113,6 +119,12 @@ void Game::loadLevel(int levelNumber) {
 			tankTransform->width,
 			tankTransform->height
 	);
+
+	Entity& projectile(entityManager.addEntity("projectile", PROJECTILE_LAYER));
+	projectile.addComponent<TransformComponent>(150+16, 495+16, 0, 0, 4, 4, 1);
+	projectile.addComponent<SpriteComponent>("projectile-image");
+	projectile.addComponent<ColliderComponent>("projectile", 150+16, 495+16, 4, 4);
+//	projectile.addComponent<ProjectilEmitterComponent>(50, 270, 200, true);
 
 	player.addComponent<TransformComponent>(240, 106, 0, 0, 32, 32, 1, 10);
 	player.addComponent<SpriteComponent>("chopper-image", 2, 90, true, false);
@@ -176,7 +188,10 @@ void Game::update() {
 	lastFrameTime = SDL_GetTicks();
 
 	entityManager.update(deltaTime);
+
 	checkCollisions();
+	Benchmark::log();
+
 	handleCameraMovement();
 }
 
@@ -224,6 +239,8 @@ void Game::processNextLevel(int level) {
 }
 
 void Game::destroy() {
+	Benchmark::stop();
+
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	TTF_Quit();

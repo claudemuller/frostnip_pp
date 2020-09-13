@@ -2,7 +2,7 @@
 #define FROSTNIP_PP_TRANSFORMCOMPONENT_H
 
 #include "../EntityManager.h"
-#include "../Vec2.h"
+#include "../Utils/Vec2.h"
 #include "../Game.h"
 
 class TransformComponent : public Component {

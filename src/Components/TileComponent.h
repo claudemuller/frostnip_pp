@@ -2,7 +2,7 @@
 #define FROSTNIP_PP_TILECOMPONENT_H
 
 #include <SDL.h>
-#include "../Vec2.h"
+#include "../Utils/Vec2.h"
 #include "../Component.h"
 
 class TileComponent : public Component {
