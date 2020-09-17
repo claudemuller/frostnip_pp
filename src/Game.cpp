@@ -194,7 +194,7 @@ void Game::loadLevel(int levelNumber) {
 
 	// Load assets from lua file.
 	sol::table levelAssets = levelData["assets"];
-
+	// TODO: sanitise.
 	unsigned int assetIndex = 0;
 	while (true) {
 		sol::optional<sol::table> existsAssetIndexNode = levelAssets[assetIndex];
@@ -227,6 +227,27 @@ void Game::loadLevel(int levelNumber) {
 			static_cast<int>(levelMap["mapSizeX"]),
 			static_cast<int>(levelMap["mapSizeY"])
 	);
+
+	// Load entities from lua file.
+	sol::table levelEntities = levelData["entities"];
+	// TODO: sanitise.
+	unsigned int entityIndex = 0;
+	while (true) {
+		sol::optional<sol::table> existsEntityIndexNode = levelEntities[entityIndex];
+		if (existsEntityIndexNode == sol::nullopt) {
+			break;
+		} else {
+			// TODO: sanitise.
+			sol::table scriptEntity = levelEntities[entityIndex];
+			std::string entityName = scriptEntity["name"];
+			LayerType entityLayer = scriptEntity["layer"];
+			sol::table entityComponents = scriptEntity["components"];
+
+			Entity& entity(entityManager.addEntity(entityName, entityLayer));
+			entity.addComponentsFromScript(entityComponents);
+		}
+		entityIndex++;
+	}
 
 }
 

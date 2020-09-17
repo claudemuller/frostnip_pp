@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include "../lib/lua/sol.hpp"
 #include "Constants.h"
 #include "Component.h"
 
@@ -24,6 +25,7 @@ public:
 	void destroy();
 	bool isActive() const { return active; };
 	void listComponents();
+	void addComponentsFromScript(sol::table components);
 
 	template<typename T, typename... TArgs>
 	T& addComponent(TArgs&& ... args) {
