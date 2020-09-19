@@ -77,7 +77,8 @@ Level1 = {
                     width = 32,
                     height = 32,
                     scale = 1,
-                    rotation = 0
+                    rotation = 0,
+                    speed = 10
                 },
                 sprite = {
                     textureAssetId = "chopper-texture",

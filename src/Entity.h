@@ -25,7 +25,7 @@ public:
 	void destroy();
 	bool isActive() const { return active; };
 	void listComponents();
-	void addComponentsFromScript(sol::table components);
+	void addComponentsFromTable(sol::table components);
 
 	template<typename T, typename... TArgs>
 	T& addComponent(TArgs&& ... args) {

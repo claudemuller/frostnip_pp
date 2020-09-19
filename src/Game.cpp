@@ -112,7 +112,7 @@ void Game::processInput() {
 	}
 }
 
-Entity& player(entityManager.addEntity("chopper", PLAYER_LAYER));
+//Entity& player(entityManager.addEntity("chopper", PLAYER_LAYER));
 
 //void Game::loadLevel(int levelNumber) {
 //	// Add assets to asset manager.
@@ -244,7 +244,7 @@ void Game::loadLevel(int levelNumber) {
 			sol::table entityComponents = scriptEntity["components"];
 
 			Entity& entity(entityManager.addEntity(entityName, entityLayer));
-			entity.addComponentsFromScript(entityComponents);
+			entity.addComponentsFromTable(entityComponents);
 		}
 		entityIndex++;
 	}
@@ -252,7 +252,6 @@ void Game::loadLevel(int levelNumber) {
 }
 
 void Game::update() {
-	int waited_for = SDL_GetTicks();
 	// Sleep the execution until the target time in milliseconds is reached.
 	int timeToWait = FRAME_TARGET_TIME - SDL_GetTicks() - lastFrameTime;
 	// Only call delay if processing is too fast in the current frame.
@@ -297,15 +296,18 @@ void Game::render() {
 }
 
 void Game::handleCameraMovement() {
-	TransformComponent* playerTransform = player.getComponent<TransformComponent>();
+	Entity* player = entityManager.getEntity("player");
+	if (player != nullptr) {
+		TransformComponent* playerTransform = player->getComponent<TransformComponent>();
 
-	camera.x = playerTransform->position.getX() - (WINDOW_WIDTH / 2);
-	camera.x = camera.x < 0 ? 0 : camera.x;
-	camera.x = camera.x > WINDOW_WIDTH ? WINDOW_WIDTH : camera.x;
+		camera.x = playerTransform->position.getX() - (WINDOW_WIDTH / 2);
+		camera.x = camera.x < 0 ? 0 : camera.x;
+		camera.x = camera.x > WINDOW_WIDTH ? WINDOW_WIDTH : camera.x;
 
-	camera.y = playerTransform->position.getY() - (WINDOW_WIDTH / 2);
-	camera.y = camera.y < 0 ? 0 : camera.y;
-	camera.y = camera.y > WINDOW_HEIGHT ? WINDOW_HEIGHT : camera.y;
+		camera.y = playerTransform->position.getY() - (WINDOW_WIDTH / 2);
+		camera.y = camera.y < 0 ? 0 : camera.y;
+		camera.y = camera.y > WINDOW_HEIGHT ? WINDOW_HEIGHT : camera.y;
+	}
 }
 
 void Game::checkCollisions() {
