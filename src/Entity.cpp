@@ -122,15 +122,6 @@ void Entity::addComponentsFromTable(sol::table components) {
 		std::string textureAssetId = component["textureAssetId"];
 
 		Entity& projectile(manager.addEntity("projectile", PROJECTILE_LAYER));
-		addComponent<TransformComponent>(
-				parentX + (parentWidth / 2),
-				parentY + (parentHeight / 2),
-				0,
-				0,
-				projectileWidth,
-				projectileHeight,
-				1
-		);
 		projectile.addComponent<TransformComponent>(
 				parentX + (parentWidth / 2),
 				parentY + (parentHeight / 2),
