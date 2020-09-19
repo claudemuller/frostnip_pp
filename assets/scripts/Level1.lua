@@ -2,6 +2,13 @@
 -- Start the seed to be used with math.random
 ----------------------------------------------------
 math.randomseed(os.time())
+hour = os.date("*t").hour
+
+if hour > 21 and hour < 9 then
+    mapTextureId = "terrain-texture-day"
+else
+    mapTextureId = "terrain-texture-night"
+end
 
 Level1 = {
     ----------------------------------------------------
@@ -49,7 +56,7 @@ Level1 = {
     -- table to define the map config variables
     ----------------------------------------------------
     map = {
-        textureAssetId = "terrain-texture-day",
+        textureAssetId = mapTextureId,
         file = "./assets/tilemaps/jungle.map",
         scale = 2,
         tileSize = 32,
