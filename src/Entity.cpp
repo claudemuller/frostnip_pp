@@ -148,7 +148,7 @@ void Entity::addComponentsFromTable(sol::table components) {
 				projectileShouldLoop
 		);
 		projectile.addComponent<ColliderComponent>(
-				"PROJECTILE",
+				"projectile",
 				parentX,
 				parentY,
 				projectileWidth,

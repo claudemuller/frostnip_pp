@@ -149,7 +149,7 @@ Level1 = {
                     animated = false
                 },
                 collider = {
-                    tag = "level-complete"
+                    tag = "level_complete"
                 }
             }
         },

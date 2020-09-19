@@ -93,19 +93,19 @@ CollisionType EntityManager::checkCollisions() const {
 					ColliderComponent* thatCollider = thatEntity->getComponent<ColliderComponent>();
 					if (Collision::checkRectangleCollision(thisCollider->collider, thatCollider->collider)) {
 
-						if (thisCollider->tag == "PLAYER" && thatCollider->tag == "ENEMY") {
+						if (thisCollider->tag == "player" && thatCollider->tag == "enemy") {
 							return PLAYER_ENEMY_COLLISION;
 						}
 
-						if (thisCollider->tag == "PLAYER" && thatCollider->tag == "PROJECTILE") {
+						if (thisCollider->tag == "player" && thatCollider->tag == "projectile") {
 							return PLAYER_PROJECTILE_COLLISION;
 						}
 
-						if (thisCollider->tag == "PLAYER" && thatCollider->tag == "LEVEL_COMPLETE") {
+						if (thisCollider->tag == "player" && thatCollider->tag == "level_complete") {
 							return PLAYER_LEVEL_COMPLETE_COLLISION;
 						}
 
-						if (thisCollider->tag == "ENEMY" && thatCollider->tag == "FRIENDLY_PROJECTILE") {
+						if (thisCollider->tag == "enemy" && thatCollider->tag == "friendly_projectile") {
 							return ENEMY_PROJECTILE_COLLISION;
 						}
 

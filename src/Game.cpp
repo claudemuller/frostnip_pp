@@ -312,7 +312,7 @@ void Game::handleCameraMovement() {
 
 void Game::checkCollisions() {
 	CollisionType collisionType = entityManager.checkCollisions();
-	if (collisionType == PLAYER_ENEMY_COLLISION) {
+	if (collisionType == PLAYER_ENEMY_COLLISION || collisionType == PLAYER_PROJECTILE_COLLISION) {
 		processGameOver();
 	} else if (collisionType == PLAYER_LEVEL_COMPLETE_COLLISION) {
 		processNextLevel(1);
