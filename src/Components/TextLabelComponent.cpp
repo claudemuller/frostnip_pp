@@ -1,11 +1,19 @@
 #include "TextLabelComponent.h"
-#include "../Utils/Vec2.h"
+#include "TransformComponent.h"
 
 TextLabelComponent::TextLabelComponent(int x, int y, std::string text, std::string fontFamily, const SDL_Color colour)
 : text(text), fontFamily(fontFamily), colour(colour) {
 	position.x = x;
 	position.y = y;
 	setLabelText(text, fontFamily);
+}
+
+void TextLabelComponent::update(float deltaTime) {
+	if (owner->hasComponent<TransformComponent>()) {
+		TransformComponent* transform = owner->getComponent<TransformComponent>();
+		position.x = transform->position.getX();
+		position.y = transform->position.getY();
+	}
 }
 
 void TextLabelComponent::setLabelText(std::string text, std::string fontId) {

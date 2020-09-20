@@ -1543,19 +1543,19 @@ Level1 = {
 
 entities = {}
 
-for i = 0,100 do
+for i = 0,0 do
     entities[i] = {
         name = "tank" .. i,
         layer = 2,
         components = {
             transform = {
                 position = {
-                    x = math.random(0, 800-32),
-                    y = math.random(0, 600-32)
+                    x = 50, --math.random(0, 800-32),
+                    y = 50 --math.random(0, 600-32)
                 },
                 velocity = {
-                    x = math.random(-10, 10),
-                    y = math.random(-10, 10)
+                    x = 50, --math.random(-10, 10),
+                    y = 0 --math.random(-10, 10)
                 },
                 width = 32,
                 height = 32,

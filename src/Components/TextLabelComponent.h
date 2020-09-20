@@ -7,12 +7,14 @@
 #include "../EntityManager.h"
 #include "../AssetManager.h"
 #include "../Game.h"
+#include "../Utils/Vec2.h"
 
 class TextLabelComponent : public Component {
 public:
 	TextLabelComponent(int x, int y, std::string text, std::string fontFamily, SDL_Color colour);
 
 	void setLabelText(std::string text, std::string fontId);
+	void update(float deltaTime) override;
 	void render() override;
 
 private:

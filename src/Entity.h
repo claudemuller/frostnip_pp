@@ -53,6 +53,7 @@ private:
 	bool active;
 	std::vector<Component*> components;
 	std::map<const std::type_info*, Component*> componentTypeMap;
+	Entity* debugLabel;
 };
 
 #endif //FROSTBYTE_ENTITY_H

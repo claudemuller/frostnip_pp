@@ -8,7 +8,7 @@ std::vector<Entity*> CollisionEngine::mMovingEntities;
 void CollisionEngine::update() {
 	// Check if entity still within its zone, otherwise move it to updated zone;
 	std::cout << "number of zones that contain entities: " << mZones.size() << std::endl;
-	std::cout << "number of entities in zone1: " << mZones.begin()->first << std::endl;
+	std::cout << "number of entities in zone?: " << "?" << std::endl;
 }
 
 void CollisionEngine::render(EntityManager* entityManager) {
@@ -72,9 +72,10 @@ void CollisionEngine::addToMovingEntities(Entity* entity) {
 }
 
 int CollisionEngine::addToZone(Entity* entity, SDL_Rect collider) {
-	int col = collider.x / collider.w * COLLISION_ZONE_SIZE;
-	int row = collider.y / collider.h * COLLISION_ZONE_SIZE;
-	int loc = WINDOW_WIDTH * row + col;
+	int col = collider.x / COLLISION_ZONE_SIZE;
+	int row = collider.y / COLLISION_ZONE_SIZE;
+	int windowWidthInZones = WINDOW_WIDTH * 2 / COLLISION_ZONE_SIZE;
+	int loc = windowWidthInZones * row + col;
 	if (mZones.find(loc) == mZones.end()) {
 		mZones.insert({loc, std::vector<Entity*>{entity}});
 	} else {

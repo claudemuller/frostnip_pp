@@ -5,6 +5,9 @@
 #include "Components/KeyboardControlComponent.h"
 #include "Components/ColliderComponent.h"
 #include "Components/ProjectileEmitterComponent.h"
+#include "Components/TextLabelComponent.h"
+
+extern EntityManager entityManager;
 
 Entity::Entity(EntityManager& manager) : manager(manager) {
 	active = true;
@@ -56,7 +59,7 @@ void Entity::addComponentsFromTable(sol::table components) {
 		addComponent<TransformComponent>(posX, posY, velX, velY, width, height, scale, speed);
 	}
 
-	sol::optional<sol::table> spriteComponentExists = components["transform"];
+	sol::optional<sol::table> spriteComponentExists = components["sprite"];
 	if (spriteComponentExists != sol::nullopt) {
 		component = components["sprite"];
 		std::string textureAssetId = component["textureAssetId"];
@@ -101,6 +104,26 @@ void Entity::addComponentsFromTable(sol::table components) {
 			int height = transformComponent->height;
 
 			addComponent<ColliderComponent>(colliderTag, x, y, width, height);//, showBoundingBox);
+
+			ColliderComponent* collider = getComponent<ColliderComponent>();
+			Entity& debugLabel(entityManager.addEntity(name + "_debug_label", layer));
+
+			debugLabel.addComponent<TransformComponent>(
+					x,
+					y,
+					transformComponent->velocity.getX(),
+					transformComponent->velocity.getY(),
+					width,
+					height,
+					transformComponent->scale
+			);
+			debugLabel.addComponent<TextLabelComponent>(
+					collider->collider.x,
+					collider->collider.y,
+					std::to_string(collider->mZoneNumber),
+					"charriot-font",
+					RED
+			);
 		}
 	}
 

@@ -1,5 +1,6 @@
 #include "FontManager.h"
 #include "Game.h"
+#include "Utils/Vec2.h"
 
 TTF_Font* FontManager::loadFont(const char* filename, int fontSize) {
 	return TTF_OpenFont(filename, fontSize);

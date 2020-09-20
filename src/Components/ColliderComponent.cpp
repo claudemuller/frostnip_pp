@@ -18,24 +18,6 @@ void ColliderComponent::init() {
 		dstRect = {collider.x, collider.y, collider.w, collider.h};
 		// Add to collision zone if has collider.
 		mZoneNumber = CollisionEngine::addToZone(owner, dstRect);
-
-		Entity& zoneNumberEntity = entityManager.addEntity(std::to_string(mZoneNumber), UI_LAYER);
-		zoneNumberEntity.addComponent<TransformComponent>(
-				transform->position.getX(),
-				transform->position.getY(),
-				transform->velocity.getX(),
-				transform->velocity.getY(),
-				transform->width,
-				transform->height,
-				transform->scale
-				);
-		zoneNumberEntity.addComponent<TextLabelComponent>(
-				collider.x + 10,
-				collider.y + 10,
-				std::to_string(mZoneNumber),
-				"charriot-font",
-				RED
-		);
 	}
 }
 
@@ -46,11 +28,6 @@ void ColliderComponent::update(float deltaTime) {
 	collider.h = transform->height * transform->scale;
 	dstRect.x = collider.x - Game::camera.x;
 	dstRect.y = collider.y - Game::camera.y;
-
-	Entity* zoneLabel = entityManager.getEntity(std::to_string(mZoneNumber));
-	TransformComponent* zoneTransform = zoneLabel->getComponent<TransformComponent>();
-	zoneTransform->position.setX(dstRect.x);
-	zoneTransform->position.setY(dstRect.y);
 }
 
 void ColliderComponent::render() {
