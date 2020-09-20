@@ -2,34 +2,53 @@
 #include "Components/ColliderComponent.h"
 #include "Components/TextLabelComponent.h"
 
+extern EntityManager entityManager;
+
+Entity* CollisionEngine::mZoneNumber;
 std::map<int, std::vector<Entity*>> CollisionEngine::mZones;
 std::vector<Entity*> CollisionEngine::mMovingEntities;
+
+void CollisionEngine::init() {
+	int zone = 0;
+	for (int y = 0; y < WINDOW_WIDTH; y += COLLISION_ZONE_SIZE) {
+		for (int x = 0; x < WINDOW_WIDTH; x += COLLISION_ZONE_SIZE) {
+			mZoneNumber = new Entity(entityManager.addEntity(std::to_string(zone), TILEMAP_LAYER));
+			mZoneNumber->addComponent<TransformComponent>(
+					x,
+					y,
+					0,
+					0,
+					COLLISION_ZONE_SIZE,
+					COLLISION_ZONE_SIZE,
+					2
+			);
+			mZoneNumber->addComponent<TextLabelComponent>(x + 10, y + 10, std::to_string(zone), "charriot-font", RED);
+			zone++;
+		}
+	}
+}
 
 void CollisionEngine::update() {
 	// Check if entity still within its zone, otherwise move it to updated zone;
 	std::cout << "number of zones that contain entities: " << mZones.size() << std::endl;
 	std::cout << "number of entities in zone?: " << "?" << std::endl;
+
+	// TODO: move this into a member variable.
+	TransformComponent* transform = mZoneNumber->getComponent<TransformComponent>();
+	mZoneNumber.X += transform->velocity.getX();
+	mZoneNumber.Y += transform->velocity.getY();
 }
 
-void CollisionEngine::render(EntityManager* entityManager) {
+void CollisionEngine::render() {
 	if (Game::debug || true) {
-		int zone = 0;
-		for (int y = 0; y < WINDOW_WIDTH; y += COLLISION_ZONE_SIZE) {
-			for (int x = 0; x < WINDOW_WIDTH; x += COLLISION_ZONE_SIZE) {
-				SDL_Rect rect = {
-						x,
-						y,
-						COLLISION_ZONE_SIZE,
-						COLLISION_ZONE_SIZE
-				};
-				SDL_SetRenderDrawColor(Game::renderer, 255, 0, 0, 255);
-				SDL_RenderDrawRect(Game::renderer, &rect);
-
-				Entity& zoneNumber(entityManager->addEntity(std::to_string(zone), UI_LAYER));
-				zoneNumber.addComponent<TextLabelComponent>(x + 10, y + 10, std::to_string(zone), "charriot-font", RED);
-				zone++;
-			}
-		}
+		SDL_SetRenderDrawColor(Game::renderer, 255, 0, 0, 255);
+		SDL_Rect rect = {
+				mZoneNumber.X?
+				mZoneNumber.Y?
+				mZoneNumber.W?
+				mZoneNumber.H?
+		};
+		SDL_RenderDrawRect(Game::renderer, &rect);
 	}
 }
 

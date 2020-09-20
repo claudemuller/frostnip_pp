@@ -1,10 +1,8 @@
 #include <iostream>
 #include <string>
 #include "Utils/Benchmark.h"
-#include "Utils/Vec2.h"
 #include "Game.h"
 #include "Map.h"
-#include "Components/TransformComponent.h"
 #include "Components/SpriteComponent.h"
 #include "Components/TextLabelComponent.h"
 
@@ -12,7 +10,7 @@ EntityManager entityManager;
 AssetManager* Game::assetManager = new AssetManager(&entityManager);
 SDL_Renderer* Game::renderer;
 SDL_Event Game::event;
-SDL_Rect Game::camera = {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT};
+Camera Game::camera = {};
 Map* map;
 bool Game::debug;
 
@@ -55,6 +53,8 @@ void Game::init(int width, int height) {
 
 	// TODO: If debug?
 	Benchmark::start();
+
+	CollisionEngine::init();
 
 	running = true;
 }
@@ -212,7 +212,9 @@ void Game::update() {
 	checkCollisions();
 	Benchmark::log();
 
-	handleCameraMovement();
+	CollisionEngine::update();
+
+	camera.update(deltaTime);
 }
 
 void Game::render() {
@@ -224,24 +226,9 @@ void Game::render() {
 	}
 	entityManager.render();
 
-	CollisionEngine::render(&entityManager);
+	CollisionEngine::render();
 
 	SDL_RenderPresent(renderer);
-}
-
-void Game::handleCameraMovement() {
-	Entity* player = entityManager.getEntity("player");
-	if (player != nullptr) {
-		TransformComponent* playerTransform = player->getComponent<TransformComponent>();
-
-		camera.x = playerTransform->position.getX() - (WINDOW_WIDTH / 2);
-		camera.x = camera.x < 0 ? 0 : camera.x;
-		camera.x = camera.x > WINDOW_WIDTH ? WINDOW_WIDTH : camera.x;
-
-		camera.y = playerTransform->position.getY() - (WINDOW_WIDTH / 2);
-		camera.y = camera.y < 0 ? 0 : camera.y;
-		camera.y = camera.y > WINDOW_HEIGHT ? WINDOW_HEIGHT : camera.y;
-	}
 }
 
 void Game::checkCollisions() {

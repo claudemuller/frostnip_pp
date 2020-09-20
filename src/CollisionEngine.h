@@ -16,16 +16,19 @@ enum CollisionType {
 
 class CollisionEngine {
 public:
+	static void init();
 	static void update();
-	static void render(EntityManager* entityManager);
+	static void render();
 	static CollisionType checkCollisions();
 	static void addToMovingEntities(Entity* entity);
 	static int addToZone(Entity* entity, SDL_Rect collider);
 	static bool checkRectangleCollision(const SDL_Rect& rectA, SDL_Rect& rectB);
 
 private:
+	static Entity* mZoneNumber;
 	static std::map<int, std::vector<Entity*>> mZones;
 	static std::vector<Entity*> mMovingEntities;
+	static SDL_Rect mDebugRect;
 };
 
 #endif //FROSTBYTE_COLLISIONENGINE_H

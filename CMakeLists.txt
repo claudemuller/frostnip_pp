@@ -21,6 +21,7 @@ add_executable(frostbyte src/main.cpp src/Constants.h
         src/Components/TransformComponent.cpp src/Components/TransformComponent.h
         src/Components/SpriteComponent.cpp src/Components/SpriteComponent.h
         src/Components/KeyboardControlComponent.cpp src/Components/KeyboardControlComponent.cpp
+        src/Camera.cpp src/Camera.cpp
         src/Components/TileComponent.cpp src/Components/TileComponent.cpp
         src/Components/ColliderComponent.cpp src/Components/ColliderComponent.cpp
         src/Components/TextLabelComponent.cpp src/Components/TextLabelComponent.cpp

@@ -8,6 +8,7 @@
 #include "Constants.h"
 #include "EntityManager.h"
 #include "Entity.h"
+#include "Camera.h"
 
 class AssetManager;
 
@@ -16,7 +17,7 @@ public:
 	static SDL_Renderer* renderer;
 	static AssetManager* assetManager;
 	static SDL_Event event;
-	static SDL_Rect camera;
+	static Camera camera;
 	static bool debug;
 
 	Game();
