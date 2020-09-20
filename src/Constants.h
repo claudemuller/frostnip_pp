@@ -9,15 +9,6 @@ const unsigned int FRAME_TARGET_TIME = (1000 / FPS);
 const unsigned int WINDOW_WIDTH = 800;
 const unsigned int WINDOW_HEIGHT = 600;
 
-enum CollisionType {
-	NO_COLLISION,
-	PLAYER_ENEMY_COLLISION,
-	PLAYER_PROJECTILE_COLLISION,
-	ENEMY_PROJECTILE_COLLISION,
-	PLAYER_VEGETATION_COLLISION,
-	PLAYER_LEVEL_COMPLETE_COLLISION
-};
-
 enum LayerType {
 	TILEMAP_LAYER,
 	VEGETATION_LAYER,
@@ -31,5 +22,6 @@ const unsigned int NUM_LAYERS = 6;
 
 const SDL_Color WHITE = {255, 255, 255, 255};
 const SDL_Color GREEN = {0, 255, 0, 255};
+const SDL_Color RED = {255, 0, 0, 255};
 
 #endif //FROSTBYTE_CONSTANTS_H

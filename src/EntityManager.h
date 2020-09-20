@@ -4,6 +4,7 @@
 #include <vector>
 #include "Entity.h"
 #include "Component.h"
+#include "CollisionEngine.h"
 
 class EntityManager {
 public:

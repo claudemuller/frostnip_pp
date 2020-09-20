@@ -2,7 +2,6 @@
 #define FROSTBYTE_COLLIDERCOMPONENT_H
 
 #include "../Game.h"
-#include "../EntityManager.h"
 #include "../Components/TransformComponent.h"
 
 class ColliderComponent : public Component {
@@ -12,6 +11,10 @@ public:
 	SDL_Rect srcRect;
 	SDL_Rect dstRect;
 	TransformComponent* transform;
+
+	bool mHit;
+	int mZoneNumber;
+	Entity* mZoneNumberEntity;
 
 	ColliderComponent(std::string tag, int x, int y, int width, int height);
 

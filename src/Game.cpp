@@ -4,13 +4,9 @@
 #include "Utils/Vec2.h"
 #include "Game.h"
 #include "Map.h"
-#include "EntityManager.h"
 #include "Components/TransformComponent.h"
 #include "Components/SpriteComponent.h"
-#include "Components/KeyboardControlComponent.h"
-#include "Components/ColliderComponent.h"
 #include "Components/TextLabelComponent.h"
-#include "Components/ProjectileEmitterComponent.h"
 
 EntityManager entityManager;
 AssetManager* Game::assetManager = new AssetManager(&entityManager);
@@ -138,6 +134,13 @@ void Game::loadLevel(int levelNumber) {
 				std::string assetFile = asset["file"];
 				assetManager->addTexture(assetId, assetFile.c_str());
 			}
+
+			if (assetType == "font") {
+				std::string assetId = asset["id"];
+				std::string assetFile = asset["file"];
+				int fontSize = static_cast<int>(asset["fontSize"]);
+				assetManager->addFont(assetId, assetFile.c_str(), fontSize);
+			}
 		}
 		assetIndex++;
 	}
@@ -178,7 +181,6 @@ void Game::loadLevel(int levelNumber) {
 		}
 		entityIndex++;
 	}
-
 }
 
 void Game::update() {
@@ -192,11 +194,11 @@ void Game::update() {
 
 	// TODO: rather control this with a DEBUG_LAYER.
 	if (Game::debug) {
-		Entity* lblFPS = entityManager.getEntity("ui-level-name");
-		if (lblFPS != NULL) {
-			TextLabelComponent* lblFPSText = lblFPS->getComponent<TextLabelComponent>();
-			lblFPSText->setLabelText(std::to_string(currentFPS), "charriot-font");
-		}
+//		Entity* lblFPS = entityManager.getEntity("ui-level-name");
+//		if (lblFPS != NULL) {
+//			TextLabelComponent* lblFPSText = lblFPS->getComponent<TextLabelComponent>();
+//			lblFPSText->setLabelText(std::to_string(currentFPS), "charriot-font");
+//		}
 	}
 
 	float deltaTime = currentFPS / 1000.0f;
@@ -222,6 +224,8 @@ void Game::render() {
 	}
 	entityManager.render();
 
+	CollisionEngine::render(&entityManager);
+
 	SDL_RenderPresent(renderer);
 }
 
@@ -241,7 +245,16 @@ void Game::handleCameraMovement() {
 }
 
 void Game::checkCollisions() {
-	CollisionType collisionType = entityManager.checkCollisions();
+	// Old collision.
+//	CollisionType collisionType = entityManager.checkCollisions();
+//	if (collisionType == PLAYER_ENEMY_COLLISION || collisionType == PLAYER_PROJECTILE_COLLISION) {
+//		processGameOver();
+//	} else if (collisionType == PLAYER_LEVEL_COMPLETE_COLLISION) {
+//		processNextLevel(1);
+//	}
+
+	CollisionEngine::update();
+	CollisionType collisionType = CollisionEngine::checkCollisions();
 	if (collisionType == PLAYER_ENEMY_COLLISION || collisionType == PLAYER_PROJECTILE_COLLISION) {
 		processGameOver();
 	} else if (collisionType == PLAYER_LEVEL_COMPLETE_COLLISION) {

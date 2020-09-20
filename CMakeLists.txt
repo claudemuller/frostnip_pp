@@ -14,9 +14,9 @@ add_executable(frostbyte src/main.cpp src/Constants.h
         src/TextureManager.cpp src/TextureManager.h
         src/AssetManager.cpp src/AssetManager.h
         src/Animation.cpp src/Animation.h
-        src/Collision.cpp src/Collision.h
         src/Map.cpp src/Map.h
         src/FontManager.cpp src/FontManager.h
+        src/CollisionEngine.h src/CollisionEngine.cpp
         src/Component.h
         src/Components/TransformComponent.cpp src/Components/TransformComponent.h
         src/Components/SpriteComponent.cpp src/Components/SpriteComponent.h

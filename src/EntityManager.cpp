@@ -1,7 +1,6 @@
 #include <iostream>
 #include "EntityManager.h"
 #include "Constants.h"
-#include "Collision.h"
 #include "Components/ColliderComponent.h"
 
 void EntityManager::clearData() {
@@ -91,7 +90,7 @@ CollisionType EntityManager::checkCollisions() const {
 				if (thisEntity->name != thatEntity->name && thatEntity->hasComponent<ColliderComponent>()) {
 
 					ColliderComponent* thatCollider = thatEntity->getComponent<ColliderComponent>();
-					if (Collision::checkRectangleCollision(thisCollider->collider, thatCollider->collider)) {
+					if (CollisionEngine::checkRectangleCollision(thisCollider->collider, thatCollider->collider)) {
 
 						if (thisCollider->tag == "player" && thatCollider->tag == "enemy") {
 							return PLAYER_ENEMY_COLLISION;
